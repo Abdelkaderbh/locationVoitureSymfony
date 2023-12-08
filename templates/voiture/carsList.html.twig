@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} List Of Cars {% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block javascripts %} {{ parent() }} {% endblock %}
+
+{% block body %}
+
+    <table class="table caption-top">
+        <caption>List of Cars</caption>
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Serie</th>
+            <th scope="col">Date M C</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Prix</th>
+            <th scope="col"> Delete / Update </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for car in cars %}
+            <th scope="row">{{ car.id }}</th>
+            <td>{{ car.serie }}</td>
+            <td>{{ car.DateMiseEn|date('Y-m-d') }}</td>
+            <td>{{ car.modele.libelle }}</td>
+            <td>{{ car.getPrixJour }}</td>
+            <td><a href="{{ path("deleteCar",{'id':car.id}) }}"> Delete </a></td>
+            <td><a href="{{ path("updateCar",{'id':car.id}) }}"> Update </a></td>
+           <td></td>
+        </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+
+    <button><a href="{{ path("add_voiture")}}"> Add Car </a>  </button>
+
+{% endblock %}
